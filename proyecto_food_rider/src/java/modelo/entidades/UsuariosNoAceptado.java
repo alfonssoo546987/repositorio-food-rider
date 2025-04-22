@@ -16,12 +16,13 @@ import javax.persistence.Id;
  * @author alfon
  */
 @Entity
-public class Usuarios implements Serializable {
+public class UsuariosNoAceptado implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_usuario;
+    private Long id_usuario_no_aceptado;
 
     @Column(name = "nick", length = 100, nullable = false)
     private String nick;
@@ -38,15 +39,15 @@ public class Usuarios implements Serializable {
     @Column(name = "tipo", length = 20, nullable = false)
     private String tipo;
 
-    @Column(name = "activo", nullable = true)
-    private Boolean activo;
+    @Column(name = "activo", nullable = false)
+    private boolean activo;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Long getId_usuario_no_aceptado() {
+        return id_usuario_no_aceptado;
     }
 
     public String getNick() {
@@ -69,12 +70,12 @@ public class Usuarios implements Serializable {
         return tipo;
     }
 
-    public Boolean getActivo() {
+    public boolean isActivo() {
         return activo;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario_no_aceptado(Long id_usuario_no_aceptado) {
+        this.id_usuario_no_aceptado = id_usuario_no_aceptado;
     }
 
     public void setNick(String nick) {
@@ -97,7 +98,7 @@ public class Usuarios implements Serializable {
         this.tipo = tipo;
     }
 
-    public void setActivo(Boolean activo) {
+    public void setActivo(boolean activo) {
         this.activo = activo;
     }
 }
