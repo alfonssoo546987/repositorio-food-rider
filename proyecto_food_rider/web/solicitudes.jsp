@@ -49,8 +49,12 @@
 
         <!-- Botón cierre de sesión -->
         <form action="/proyecto_food_rider" method="POST">
+            <%
+                session.invalidate();
+            %>
             <button type="submit"><fmt:message key="boton.cerrarSesion"/></button>
         </form>
+
         <!-- Botón cierre vuelta a la página anterior -->
         <form action="pagina_principal.jsp">
             <button type="submit"><fmt:message key="boton.regresoPaginaPrincipal"/></button>

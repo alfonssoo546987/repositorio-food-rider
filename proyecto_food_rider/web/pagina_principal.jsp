@@ -5,83 +5,113 @@
 --%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    String tipoUsuario = (String) session.getAttribute("tipoUsuario");
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><fmt:message key="titulo.miAplicacion" /></title>
+
     </head>
-    <body>
+    <body data-tipo="<%= tipoUsuario%>">
         <fmt:setBundle basename="internacionalizacion.mensajes"/>
         <fmt:setLocale value="${sessionScope.idioma}"/>
 
-
-
-        <form action="ServletRegistro" method="POST" id="formulario">
-            <div id="campo-profesion">
-                <label for="profesion-empleado"><fmt:message key="campo.profesion" /></label>                
-                <input type="text" name="profesion-empleado" placeholder="<fmt:message key='campo.profesion' />" required>
-            </div>
-            <div id="campo-salario" style="display:none;">
-                <label for="salario-profesion"><fmt:message key="campo.salario" /></label>                
-                <input type="number" name="salario-profesion" placeholder="<fmt:message key='campo.salario' />" required>
-            </div>
-            <button type="submit"><fmt:message key="boton.actualizarLista" /></button>
-        </form>
-
-        <ul id="lista-empleados">
-            <core:forEach var="empleado" items="${empleados}">
-                <li data-salario="${empleado.salario}">
-                    ${empleado.profesion}
-                </li>
-            </core:forEach>
-        </ul>
-
-        <!-- Botón independiente para realizar los cambios -->
-        <button id="btnCambiar"><fmt:message key="boton.cambiarContenido" /></button>
-
-        <!-- Texto traducido oculto para el botón actualizado -->
-        <span id="texto-actualizado" style="display:none;">
-            <fmt:message key="mensaje.listaActualizada" />
-        </span>
-
-        <h1>-----------------------------------------</h1>
-
         <h1>Food Rider</h1>
-        <form action="/proyecto_food_rider/">
+
+        <form action="/proyecto_food_rider/" id="boton_cerrar_sesion">
             <button><fmt:message key="boton.cerrarSesion"/></button>
         </form>   
-        <form action="formulario_registro.jsp">
-            <button><fmt:message key="boton.registrarRider"/></button>
+
+        <form action="formulario_registro.jsp" id="boton_registro_rider">
+            <input type="hidden" name="usuario" value="Rider">
+            <button type="submit"><fmt:message key="boton.registrarRider"/></button>
         </form>
-        <form action="formulario_registro.jsp">
-            <button><fmt:message key="boton.registrarComprador"/></button>
-        </form>      
-        <button><fmt:message key="boton.proveedores"/></button>
-        <button><fmt:message key="boton.clientes"/></button>
-        <button><fmt:message key="boton.riders"/></button>
-        <button><fmt:message key="boton.compradores"/></button>
-        <button><fmt:message key="boton.socios"/></button>
-        <form action="pp.jsp" method="GET">
-            <button type="submit">prueba dom</button>
+
+        <form action="formulario_registro.jsp" id="boton_registro_comprador">
+            <input type="hidden" name="usuario" value="Comprador">
+            <button type="submit"><fmt:message key="boton.registrarComprador"/></button>
         </form>
-        <button><fmt:message key="boton.rutaSugerida"/></button>
-        <form action="ServletListarSolicitudes" method="GET">
+
+        <form action="formulario_registro.jsp" id="boton_registro_administrador">
+            <input type="hidden" name="usuario" value="Administrador">
+            <button type="submit"><fmt:message key="boton.registrarAdministrador"/></button>
+        </form> 
+
+        <form action="formulario_registro.jsp" id="boton_registro_proveedor">
+            <input type="hidden" name="usuario" value="Proveedor">
+            <button type="submit"><fmt:message key="boton.registrarProveedor"/></button>
+        </form>
+
+        <form action="" id="boton_proveedor">
+            <button><fmt:message key="boton.proveedores"/></button>
+        </form>
+
+        <form action="" id="boton_clientes">
+            <button><fmt:message key="boton.clientes"/></button>
+        </form>
+
+        <form action="" id="boton_riders">
+            <button><fmt:message key="boton.riders"/></button>
+        </form>
+
+        <form action="" id="boton_compradores">
+            <button><fmt:message key="boton.compradores"/></button>
+        </form>
+        <form action="" id="boton_socios">
+            <button><fmt:message key="boton.socios"/></button>
+        </form>
+        <form action="" id="boton_ruta_pendiente">
+            <button><fmt:message key="boton.rutaPendiente"/></button>
+        </form>
+
+        <form action="" id="boton_administracion_rutas">
+            <button><fmt:message key="boton.administracionRutas"/></button>
+        </form>
+        <form action="" id="boton_historico_rutas">
+            <button><fmt:message key="boton.historicoRutas"/></button>
+        </form>
+
+        <form action="" id="boton_productos_frecuentes">
+            <button><fmt:message key="boton.productosFrecuentes"/></button>
+        </form>
+
+        <form action="" id="boton_almacen">
+            <button><fmt:message key="boton.almacen"/></button>
+        </form>
+
+        <form action="" id="boton_incidencias">
+            <button><fmt:message key="boton.incidencias"/></button>
+        </form>
+
+        <form action="" id="boton_historico_incidencia">
+            <button><fmt:message key="boton.historicoIncidencia"/></button>
+        </form>
+
+        <form action="" id="boton_estadisticas">
+            <button><fmt:message key="boton.estadisticas"/></button>
+        </form>
+
+        <form action="" id="boton_ruta_sugerida">
+            <button><fmt:message key="boton.rutaSugerida"/></button>
+        </form>
+
+        <form action="ServletListarSolicitudes" method="GET" id="boton_solicitudes">
             <button type="submit"><fmt:message key="boton.solicitudes"/></button>
         </form>
-        <button><fmt:message key="boton.rutaPendiente"/></button>
-        <button><fmt:message key="boton.administracionRutas"/></button>
-        <button><fmt:message key="boton.historicoRutas"/></button>
-        <button><fmt:message key="boton.productosFrecuentes"/></button>
-        <button><fmt:message key="boton.almacen"/></button>
-        <button><fmt:message key="boton.incidencias"/></button>
-        <button><fmt:message key="boton.historicoIncidencia"/></button>
-        <button><fmt:message key="boton.estadisticas"/></button>
-        <button><fmt:message key="boton.contabilidad"/></button>
-        <a href="contacto.jsp"><fmt:message key="enlace.contacto"/></a>
 
-        <script src="scripts/scripts_dom/dom_pagina_principal.js" defer></script>
+        <form action="ServletListarSolicitudes" method="GET" id="boton_contabilidad">
+            <button><fmt:message key="boton.contabilidad"/></button>
+        </form>
+
+
+        <a href="contacto.jsp"><fmt:message key="enlace.contacto"/></a>
+        <!-- Script externo -->
+        <script src="scripts/scripts_dom/dom_pagina_principal.js"></script>
     </body>
 </html>

@@ -14,12 +14,12 @@
     <body>
         <h2>Selecciona un idioma / Choose a language</h2>
 
-        <form action="ServletIdiomas" method="POST">
+        <form action="ServletIdiomas" method="GET">
             <input type="hidden" name="idioma" value="es" />
             <button type="submit">Botón Español</button>
         </form>
 
-        <form action="ServletIdiomas" method="POST">
+        <form action="ServletIdiomas" method="GET">
             <input type="hidden" name="idioma" value="en" />
             <button type="submit">English Button</button>
         </form>

@@ -7,6 +7,14 @@
     <class>modelo.entidades.UsuariosNoAceptado</class>
     <class>modelo.entidades.registros.administrador.EmpresasCliente</class>
     <class>modelo.entidades.registros.administrador.Email</class>
+    <class>modelo.entidades.tienda.TiposProducto</class>
+    <class>modelo.entidades.tienda.Productos</class>
+    <class>modelo.entidades.tienda.EmpresasProveedora</class>
+    <class>modelo.entidades.tienda.ProductosFrecuente</class>
+    <class>modelo.entidades.tienda.Administradores</class>
+    <class>modelo.entidades.usuarios.Administradores</class>
+    <class>modelo.entidades.usuarios.EmpleadosRider</class>
+    <class>modelo.entidades.usuarios.Compradores</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyecto_food_rider?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

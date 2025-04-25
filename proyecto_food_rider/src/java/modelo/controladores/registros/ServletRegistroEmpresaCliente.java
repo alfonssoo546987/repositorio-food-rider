@@ -83,6 +83,7 @@ System.out.println("-2");
         empresasClienteNoAceptado.setCif(cif);
         empresasClienteNoAceptado.setDireccion(direccion);
 System.out.println("-3");
+
         // Creamos el registro en la tabla usuarionoaceptado, con la ayuda de su servicio.
         servicioUsuariosNoAceptado.crearUsuariosNoAceptado(usuariosNoAceptado);
 

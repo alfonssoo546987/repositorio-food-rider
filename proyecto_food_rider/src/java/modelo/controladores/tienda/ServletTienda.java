@@ -2,22 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package modelo.controladores.administrador;
+package modelo.controladores.tienda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.entidades.tienda.Productos;
+import modelo.servicios.tienda.ServicioProductos;
 
 /**
  *
  * @author alfon
  */
-@WebServlet(name = "ServletPaginaPrincipal", urlPatterns = {"/ServletPaginaPrincipal"})
-public class ServletPaginaPrincipal extends HttpServlet {
+@WebServlet(name = "ServletTienda", urlPatterns = {"/ServletTienda"})
+public class ServletTienda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +45,23 @@ public class ServletPaginaPrincipal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("pagina_principal.jsp");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto_food_riderPU");
+        System.out.println("estas en servlet tienda");
+        try {
+            System.out.println("1");
+            // Creamos una lista de productos disponibles.
+            ServicioProductos servicioProductos = new ServicioProductos(entityManagerFactory);
+            System.out.println("2");
+            List<Productos> productos = servicioProductos.obtenerProductos();
+            System.out.println("3");
+            request.setAttribute("productosAt", productos);
+            System.out.println("4");
+            getServletContext().getRequestDispatcher("/tienda.jsp").forward(request, response);
+        } catch (Exception exception) {
+            request.setAttribute("error", "Algo no ha salido bien: " + exception);
+        } finally {
+            entityManagerFactory.close();
+        }
     }
 
     /**

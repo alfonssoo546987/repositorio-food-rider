@@ -52,6 +52,7 @@ public class ServletInicioSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         try {
             // Creamos objeto de Usuario en base a un determinado e-mail.
             String nick = request.getParameter("nick");
