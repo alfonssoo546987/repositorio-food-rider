@@ -20,7 +20,7 @@
 
         <h1>Tienda Food Rider</h1>
 
-        <h2>Listado de Productos</h2>
+        <h2>Listado de Productoss</h2>
 
         <core:forEach var="producto" items="${productos}">
             <div>
