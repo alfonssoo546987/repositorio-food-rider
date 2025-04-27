@@ -87,7 +87,6 @@ public class ServletAceptaORechazaSolicitud extends HttpServlet {
                     usuarios.setTelefono(servicioUsuarioNoAceptado.obtenerUsuariosNoAceptadoPorId(idUsuario).getTelefono());
                     usuarios.setEmail(servicioUsuarioNoAceptado.obtenerUsuariosNoAceptadoPorId(idUsuario).getEmail());
                     usuarios.setTipo("Empresa Cliente");
-                    usuarios.setActivo(false);
                     servicioUsuario.crearUsuarios(usuarios);
 
                     // Añadimos el registro de la tabla EmpresasClienteNoAceptado a la tabla EmpresasCliente

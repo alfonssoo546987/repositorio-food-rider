@@ -39,66 +39,51 @@ public class UsuariosNoAceptado implements Serializable {
     @Column(name = "tipo", length = 20, nullable = false)
     private String tipo;
 
-    @Column(name = "activo", nullable = false)
-    private boolean activo;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public Long getId_usuario_no_aceptado() {
         return id_usuario_no_aceptado;
-    }
-
-    public String getNick() {
-        return nick;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public boolean isActivo() {
-        return activo;
     }
 
     public void setId_usuario_no_aceptado(Long id_usuario_no_aceptado) {
         this.id_usuario_no_aceptado = id_usuario_no_aceptado;
     }
 
+    public String getNick() {
+        return nick;
+    }
+
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

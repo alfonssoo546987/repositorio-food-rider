@@ -29,13 +29,9 @@ public class ServicioEmpresasProveedora {
     // Método para crear todas los registros de administradores
     public void crearEmpresasProveedora(EmpresasProveedora empresasProveedora) {
         EntityManager entityManager = getEntityManager();
-        System.out.println("1");
         try {
-            System.out.println("2");
             entityManager.getTransaction().begin();
-            System.out.println("3");
             entityManager.persist(empresasProveedora);
-            System.out.println("4");
             entityManager.getTransaction().commit();
         } finally {
             entityManager.close();
@@ -46,7 +42,6 @@ public class ServicioEmpresasProveedora {
     // Método para obtener todas las empresas cliente
     public List<EmpresasProveedora> obtenerEmpresasProveedora() {
         EntityManager entityManager = getEntityManager();
-
         try {
             TypedQuery<EmpresasProveedora> query = entityManager.createQuery("SELECT s FROM EmpresasProveedora s", EmpresasProveedora.class);
             return query.getResultList();

@@ -15,14 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.entidades.Usuarios;
+import modelo.entidades.tienda.EmpresasProveedora;
 import modelo.servicios.ServicioUsuarios;
+import modelo.servicios.tienda.ServicioEmpresasProveedora;
 
 /**
  *
  * @author alfon
  */
-@WebServlet(name = "ServletListarUsuarios", urlPatterns = {"/ServletListarUsuarios"})
-public class ServletListarUsuarios extends HttpServlet {
+@WebServlet(name = "ServletListarEmpresasProveedora", urlPatterns = {"/ServletListarEmpresasProveedora"})
+public class ServletListarEmpresasProveedora extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,29 +44,21 @@ public class ServletListarUsuarios extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto_food_riderPU");
+    ServicioUsuarios servicioUsuarios = new ServicioUsuarios(entityManagerFactory);
+    ServicioEmpresasProveedora servicioEmpresasProveedora = new ServicioEmpresasProveedora(entityManagerFactory);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Entramos en doget ServletListarUsuarios");
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto_food_riderPU");
-        System.out.println("Pasamos EntityManagerFactory");
         try {
-            // Creamos una lista de solicitudes totales.
-            ServicioUsuarios servicioUsuarios = new ServicioUsuarios(entityManagerFactory);
-            System.out.println("pasamos servicio");
-            List<Usuarios> usuarios = servicioUsuarios.obtenerUsuarios();
-            System.out.println("Cramos la lista usuarios");
-            request.setAttribute("usuariosAt", usuarios);
-            System.out.println("Creamos el atributo usuariosAt");
-            for (Usuarios usuario : usuarios) {
-                System.out.println(usuario.getNick());
-                System.out.println(usuario.getContrasenia());
-            }
-            getServletContext().getRequestDispatcher("/ver_usuarios.jsp").forward(request, response);
+            // Creamos una lista de empresas proveedoras.
+            List<EmpresasProveedora> empresasProveedora = servicioEmpresasProveedora.obtenerEmpresasProveedora();
+            request.setAttribute("empresasProveedoraAt", empresasProveedora);
+            getServletContext().getRequestDispatcher("/empresas_proveedora.jsp").forward(request, response);
         } catch (Exception exception) {
             request.setAttribute("error", "Algo no ha salido bien: " + exception);
-        } finally {
-            entityManagerFactory.close();
+            getServletContext().getRequestDispatcher("/empresas_proveedora.jsp").forward(request, response);
         }
     }
 

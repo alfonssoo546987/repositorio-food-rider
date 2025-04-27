@@ -23,5 +23,9 @@
             <input type="hidden" name="idioma" value="en" />
             <button type="submit">English Button</button>
         </form>
+
+        <form action="/proyecto_food_rider/" id="boton_cerrar_sesion">
+            <button>Cerrar sesión</button>
+        </form>   
     </body>
 </html>

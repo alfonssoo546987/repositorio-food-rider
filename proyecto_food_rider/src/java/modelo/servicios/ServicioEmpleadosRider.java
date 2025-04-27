@@ -43,9 +43,11 @@ public class ServicioEmpleadosRider {
     // Método para obtener todas las empresas cliente
     public List<EmpleadosRider> obtenerEmpleadosRider() {
         EntityManager entityManager = getEntityManager();
-
+        System.out.println("aaaaaaa");
         try {
+            System.out.println("bbbbbb");
             TypedQuery<EmpleadosRider> query = entityManager.createQuery("SELECT s FROM EmpleadosRider s", EmpleadosRider.class);
+            System.out.println("cccccccccc");
             return query.getResultList();
         } finally {
             entityManager.close();

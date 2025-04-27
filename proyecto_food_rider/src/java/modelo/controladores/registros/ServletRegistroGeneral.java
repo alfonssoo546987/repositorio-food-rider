@@ -89,7 +89,6 @@ public class ServletRegistroGeneral extends HttpServlet {
         usuarios.setTelefono(telefono);
         usuarios.setEmail(email);
         usuarios.setTipo("Camaron");
-        usuarios.setActivo(false);
 
         EmpresasProveedora empresas_proveedora = new EmpresasProveedora();
         empresas_proveedora.setNombre_empresa_proveedora(nombre_empresa);

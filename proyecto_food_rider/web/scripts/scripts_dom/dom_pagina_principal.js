@@ -4,7 +4,8 @@
  */
 document.addEventListener("DOMContentLoaded", () => {
     const tipo = document.body.dataset.tipo;
-    const formulario = document.getElementById("formulario_registro");
+
+    //const formulario = document.getElementById("formulario_registro");
 
     // Ocultamos todas las secciones
     document.getElementById("boton_cerrar_sesion").style.display = "none";
@@ -31,8 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mostramos en función del tipo de usuario
     switch (tipo) {
         case "Administrador":
-
-            
             document.getElementById("boton_cerrar_sesion").style.display = "block";
             document.getElementById("boton_registro_rider").style.display = "block";
             document.getElementById("boton_registro_comprador").style.display = "block";
@@ -55,8 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
             break;
 
         case "Comprador":
-            
-            
             document.getElementById("boton_cerrar_sesion").style.display = "block";
             document.getElementById("boton_ruta_pendiente").style.display = "block";
             document.getElementById("boton_administracion_rutas").style.display = "block";
@@ -69,8 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             break;
 
         case "Rider":
-            formulario.action = "ServletIdiomas";
-            
             document.getElementById("boton_cerrar_sesion").style.display = "block";
             document.getElementById("boton_ruta_pendiente").style.display = "block";
             document.getElementById("boton_administracion_rutas").style.display = "block";
@@ -88,10 +83,5 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("boton_incidencias").style.display = "block";
             document.getElementById("boton_historico_incidencia").style.display = "block";
             break;
-
-        default:
-            // Opcional: Manejo de caso por defecto si es necesario
-            break;
     }
-
 });

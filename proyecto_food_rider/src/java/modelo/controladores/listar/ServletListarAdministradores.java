@@ -14,17 +14,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.entidades.UsuariosNoAceptado;
-import modelo.entidades.registros.EmpresasClienteNoAceptado;
-import modelo.servicios.registros.ServicioEmpresasClienteNoAceptado;
-import modelo.servicios.registros.ServicioUsuariosNoAceptado;
+import modelo.entidades.Usuarios;
+import modelo.entidades.usuarios.Administradores;
+import modelo.servicios.ServicioAdministradores;
+import modelo.servicios.ServicioUsuarios;
 
 /**
  *
  * @author alfon
  */
-@WebServlet(name = "ServletListarSolicitudes", urlPatterns = {"/ServletListarSolicitudes"})
-public class ServletListarSolicitudes extends HttpServlet {
+@WebServlet(name = "ServletListarAdministradores", urlPatterns = {"/ServletListarAdministradores"})
+public class ServletListarAdministradores extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,23 +45,26 @@ public class ServletListarSolicitudes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto_food_riderPU");
-    ServicioUsuariosNoAceptado servicioUsuariosNoAceptado = new ServicioUsuariosNoAceptado(entityManagerFactory);
-    ServicioEmpresasClienteNoAceptado servicioEmpresasClienteNoAceptado = new ServicioEmpresasClienteNoAceptado(entityManagerFactory);
+    ServicioUsuarios servicioUsuarios = new ServicioUsuarios(entityManagerFactory);
+    ServicioAdministradores servicioAdministradores = new ServicioAdministradores(entityManagerFactory);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
-            // Creamos una lista de solicitudes totales.
-            List<UsuariosNoAceptado> usuariosNoAceptado = servicioUsuariosNoAceptado.obtenerUsuariosNoAceptado();
-            request.setAttribute("usuariosNoAceptadoAt", usuariosNoAceptado);
-
-            List<EmpresasClienteNoAceptado> empresasClienteNoAceptado = servicioEmpresasClienteNoAceptado.obtenerEmpresasClienteNoAceptado();
-            request.setAttribute("empresasClienteNoAceptadoAt", empresasClienteNoAceptado);
-            getServletContext().getRequestDispatcher("/solicitudes.jsp").forward(request, response);
+            // Creamos una lista de administradores.
+            List<Usuarios> usuarios = servicioUsuarios.obtenerUsuarios();
+            request.setAttribute("usuariosAt", usuarios);
+            List<Administradores> administradores = servicioAdministradores.obtenerAdministradores();
+            for (Administradores admin : administradores) {
+                System.out.println(admin);
+            }
+            request.setAttribute("administradoresAt", administradores);
+            System.out.println("vvvvvvvv6");
+            getServletContext().getRequestDispatcher("/administradores.jsp").forward(request, response);
         } catch (Exception exception) {
             request.setAttribute("error", "Algo no ha salido bien: " + exception);
+            getServletContext().getRequestDispatcher("/administradores.jsp").forward(request, response);
         }
     }
 

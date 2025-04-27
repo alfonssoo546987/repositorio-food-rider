@@ -42,10 +42,13 @@ public class ServicioAdministradores {
 
     // Método para obtener todas las empresas cliente
     public List<Administradores> obtenerAdministradores() {
+        System.out.println("vvvvvvvv");
         EntityManager entityManager = getEntityManager();
-
+                System.out.println("vvvvvvvv2");
         try {
+                    System.out.println("vvvvvvv3");
             TypedQuery<Administradores> query = entityManager.createQuery("SELECT s FROM Administradores s", Administradores.class);
+                    System.out.println("vvvvvvv4");
             return query.getResultList();
         } finally {
             entityManager.close();

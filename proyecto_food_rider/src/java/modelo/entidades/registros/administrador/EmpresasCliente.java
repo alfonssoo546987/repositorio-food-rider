@@ -25,7 +25,7 @@ public class EmpresasCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_empresa;
+    private Long id_empresa_cliente;
 
     @Column(name = "nombre_empresa_cliente", length = 255, nullable = false)
     private String nombre_empresa_cliente;
@@ -40,44 +40,40 @@ public class EmpresasCliente implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false, unique = true)
     private Usuarios usuario;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public Long getId_empresa_cliente() {
+        return id_empresa_cliente;
     }
 
-    public Long getId_empresa() {
-        return id_empresa;
+    public void setId_empresa_cliente(Long id_empresa_cliente) {
+        this.id_empresa_cliente = id_empresa_cliente;
     }
 
     public String getNombre_empresa_cliente() {
         return nombre_empresa_cliente;
     }
 
-    public String getCif() {
-        return cif;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setId_empresa(Long id_empresa) {
-        this.id_empresa = id_empresa;
-    }
-
     public void setNombre_empresa_cliente(String nombre_empresa_cliente) {
         this.nombre_empresa_cliente = nombre_empresa_cliente;
+    }
+
+    public String getCif() {
+        return cif;
     }
 
     public void setCif(String cif) {
         this.cif = cif;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
     }
 
     public void setUsuario(Usuarios usuario) {

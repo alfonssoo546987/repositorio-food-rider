@@ -18,8 +18,7 @@ CREATE TABLE UsuariosNoAceptado (
     contrasenia VARCHAR(100) NOT NULL,
     telefono VARCHAR(20),
     email VARCHAR(100),
-    tipo VARCHAR(20) NOT NULL,
-    activo BOOLEAN NOT NULL
+    tipo VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE EmpresasClienteNoAceptado (
@@ -41,8 +40,7 @@ CREATE TABLE Usuarios (
     contrasenia VARCHAR(100) NOT NULL,
     telefono VARCHAR(20),
     email VARCHAR(100),
-    tipo VARCHAR(20) NOT NULL,
-    activo BOOLEAN NOT NULL
+    tipo VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE EmpresasCliente (
@@ -121,7 +119,7 @@ CREATE TABLE Productos (
 
 -- Tabla de empresas proveedoras
 CREATE TABLE EmpresasProveedora (
-    id_empresa_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa_proveedora INT AUTO_INCREMENT PRIMARY KEY,
     nombre_empresa_proveedora VARCHAR(255) NOT NULL UNIQUE,
     cif VARCHAR(100) UNIQUE,
     direccion VARCHAR(255) NOT NULL UNIQUE,
@@ -138,7 +136,7 @@ CREATE TABLE ProductosFrecuentes (
     precio DECIMAL(10,2),
     
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto),
-    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_cliente),
+    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_proveedora),
     
     UNIQUE(id_producto, id_empresa_proveedora)
 );
@@ -191,7 +189,7 @@ CREATE TABLE ProductosAlmacenados (
     descripcion TEXT,
     notas TEXT,
     UNIQUE(nombre_producto, marca),  -- Restricción única sobre nombre_producto y marca
-    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_cliente)
+    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_proveedora)
 );
 
 CREATE TABLE CompraFinal (
@@ -212,17 +210,21 @@ CREATE TABLE CompraFinal (
     UNIQUE(nombre_producto, marca),  -- Restricción única sobre nombre_producto y marca
     FOREIGN KEY (id_producto_almacenado) REFERENCES ProductosAlmacenados(id_producto_almacenado),
     FOREIGN KEY (id_ruta_compra) REFERENCES RutaCompraAsignada(id_ruta_compra),
-    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_cliente)
+    FOREIGN KEY (id_empresa_proveedora) REFERENCES EmpresasProveedora(id_empresa_proveedora)
 );
 
 -- Recuperar el último ID insertado
 SET @id_usuario := LAST_INSERT_ID();
 
-INSERT INTO Usuarios (nick, contrasenia, telefono, email, tipo, activo)
-VALUES 
-('ann', 'a', '5559876543', 'ann@example.com', 'Administrador', FALSE),
-('jon', 'j', '7827439136', 'jon@example.com', 'Rider', FALSE),
-('car', 'c', '5637478467', 'carlos@example.com', 'Comprador', FALSE);
+-- Insertamos valores
+
+INSERT INTO Usuarios (nick, contrasenia, telefono, email, tipo) VALUES
+('aa', 'a', '238745678', 'aa@example.com', 'Administrador'),
+('rr', 'r', '790456789', 'cc@example.com', 'Rider'),
+('cc', 'c', '979567890', 'pp@example.com', 'Comprador'),
+('ec', 'ec', NULL, 'ec@example.com', 'Empresa Cliente');
+
+
 
 INSERT INTO Administradores (numero_documento_administrador, nss, nombre, apellido_principal, apellido_secundario, id_usuario)
 VALUES 

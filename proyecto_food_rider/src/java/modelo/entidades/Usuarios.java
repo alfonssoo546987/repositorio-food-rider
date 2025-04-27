@@ -38,66 +38,51 @@ public class Usuarios implements Serializable {
     @Column(name = "tipo", length = 20, nullable = false)
     private String tipo;
 
-    @Column(name = "activo", nullable = true)
-    private Boolean activo;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public Long getId_usuario() {
         return id_usuario;
-    }
-
-    public String getNick() {
-        return nick;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Boolean getActivo() {
-        return activo;
     }
 
     public void setId_usuario(Long id_usuario) {
         this.id_usuario = id_usuario;
     }
 
+    public String getNick() {
+        return nick;
+    }
+
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

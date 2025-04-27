@@ -20,14 +20,14 @@
             <label for="nick">Nick:</label><br>
             <input type="text" id="nick" name="nick" required><br><br>
 
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+            <label for="contrasenia">Contraseña:</label><br>
+            <input type="password" id="contrasenia" name="contrasenia" required><br><br>
 
             <label for="telefono">Teléfono:</label><br>
             <input type="text" id="telefono" name="telefono" required><br><br>
 
-            <label for="contrasenia">Contraseña:</label><br>
-            <input type="password" id="contrasenia" name="contrasenia" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
             <label for="nombre_empresa_cliente">Nombre de la Empresa:</label><br>
             <input type="text" id="nombre_empresa_cliente" name="nombre_empresa_cliente" required><br><br>

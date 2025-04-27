@@ -21,7 +21,7 @@ public class EmpresasProveedora implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_empresa_proveedora;
 
     @Column(nullable = false, unique = true)
     private String nombre_empresa_proveedora;
@@ -41,12 +41,12 @@ public class EmpresasProveedora implements Serializable {
     @Column(unique = true)
     private String email;
 
-    public Long getId() {
-        return id;
+    public Long getId_empresa_proveedora() {
+        return id_empresa_proveedora;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_empresa_proveedora(Long id_empresa_proveedora) {
+        this.id_empresa_proveedora = id_empresa_proveedora;
     }
 
     public String getNombre_empresa_proveedora() {
@@ -96,5 +96,4 @@ public class EmpresasProveedora implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }

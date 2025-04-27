@@ -53,51 +53,54 @@ public class ServletRegistroEmpresaCliente extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto_food_riderPU");
+
     ServicioUsuariosNoAceptado servicioUsuariosNoAceptado = new ServicioUsuariosNoAceptado(entityManagerFactory);
+
+    UsuariosNoAceptado usuariosNoAceptado = new UsuariosNoAceptado();
+
     ServicioEmpresasClienteNoAceptado servicioEmpresasClienteNoAceptado = new ServicioEmpresasClienteNoAceptado(entityManagerFactory);
+
+    EmpresasClienteNoAceptado empresasClienteNoAceptado = new EmpresasClienteNoAceptado();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("-1");
+
         // Recoger datos del formulario
         String nick = request.getParameter("nick");
         String email = request.getParameter("email");
         String telefono = request.getParameter("telefono");
         String contrasenia = request.getParameter("contrasenia");
+
         String nombre_empresa = request.getParameter("nombre_empresa_cliente");
         String cif = request.getParameter("cif");
         String direccion = request.getParameter("direccion");
-System.out.println("-2");
-        // Insertamos valores en variable de entidades mediante setters
-        UsuariosNoAceptado usuariosNoAceptado = new UsuariosNoAceptado();
-        usuariosNoAceptado.setNick(nick);
-        usuariosNoAceptado.setEmail(email);
-        usuariosNoAceptado.setTelefono(telefono);
-        usuariosNoAceptado.setContrasenia(contrasenia);
-        usuariosNoAceptado.setTipo("Empresa Cliente");
-        usuariosNoAceptado.setActivo(false);
 
-        EmpresasClienteNoAceptado empresasClienteNoAceptado = new EmpresasClienteNoAceptado();
+        // Hacemos los setters en la entidad Usuarios
+        usuariosNoAceptado.setNick(nick);
+        usuariosNoAceptado.setContrasenia(contrasenia);
+        usuariosNoAceptado.setTelefono(telefono);
+        usuariosNoAceptado.setEmail(email);
+        usuariosNoAceptado.setTipo("Empresa cliente");
+
+        /*
+        Pasamos los valores antes setteados a un registro de la tabla Usuarios, con la ayuda de un método del servicio. Esto se debe hacer para poder tener un objeto que sera una propiedad en la siguinete tabla
+         */
+        servicioUsuariosNoAceptado.crearUsuariosNoAceptado(usuariosNoAceptado);
+
+        // Hacemos los setters en la entidad EmpresaClienteNoAceptad
         empresasClienteNoAceptado.setNombre_empresa_cliente(nombre_empresa);
         empresasClienteNoAceptado.setCif(cif);
         empresasClienteNoAceptado.setDireccion(direccion);
-System.out.println("-3");
-
-        // Creamos el registro en la tabla usuarionoaceptado, con la ayuda de su servicio.
-        servicioUsuariosNoAceptado.crearUsuariosNoAceptado(usuariosNoAceptado);
-
-        // Asignamos el usuario con ID ya generado 
         empresasClienteNoAceptado.setUsuarioNoAceptado(usuariosNoAceptado);
 
-        // Creamos el registro en la tabla empresaclientenoaceptado, con la ayuda de su servicio.
+        // Hacemos los setters en la entidad Administradores
         servicioEmpresasClienteNoAceptado.crearEmpresasClienteNoAceptado(empresasClienteNoAceptado);
 
         // Guardar datos en sesión para uso futuro durante la navegación
-        HttpSession session = request.getSession();
-        session.setAttribute("usuarioRegistrado", usuariosNoAceptado);
-        session.setAttribute("empresaRegistrada", empresasClienteNoAceptado);
-
+        //HttpSession session = request.getSession();
+        //session.setAttribute("usuarioRegistrado", usuariosNoAceptado);
+        //session.setAttribute("empresaRegistrada", empresasClienteNoAceptado);
         // Reenviamos a otra página
         response.sendRedirect("/proyecto_food_rider/");
     }
@@ -111,5 +114,4 @@ System.out.println("-3");
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

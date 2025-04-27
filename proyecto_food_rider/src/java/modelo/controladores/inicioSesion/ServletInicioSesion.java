@@ -49,6 +49,8 @@ public class ServletInicioSesion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    ServicioUsuarios servicioUsuarios = new ServicioUsuarios(Persistence.createEntityManagerFactory("proyecto_food_riderPU"));
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,28 +59,23 @@ public class ServletInicioSesion extends HttpServlet {
             // Creamos objeto de Usuario en base a un determinado e-mail.
             String nick = request.getParameter("nick");
             String contrasenia = request.getParameter("contrasenia");
-            ServicioUsuarios servicioUsuarios = new ServicioUsuarios(Persistence.createEntityManagerFactory("proyecto_food_riderPU"));
 
             Usuarios usuarios = servicioUsuarios.obtenerUsuarioPorNick(nick);
 
-            // Creamos una sesion e introducimos el usuario creado en ella.
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("usuariosAT", usuarios);
-            sesion.setAttribute("tipoUsuario", usuarios.getTipo());
-
             // Validamos al usuario.
             if (usuarios != null && usuarios.getContrasenia().equals(contrasenia)) {
-                if (usuarios.getActivo()) {
-                    request.setAttribute("error", usuarios.getNick() + " ha sido inactivada por el administrador.");
-                    response.sendRedirect("/proyecto_food_rider/index.html");
-                } else {
-                    response.sendRedirect("seleccion_idiomas.jsp");
-                }
+
+                // Creamos una sesion e introducimos el usuario creado en ella.
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("usuariosAt", usuarios);
+                sesion.setAttribute("tipoUsuarioAt", usuarios.getTipo());
+                response.sendRedirect("seleccion_idiomas.jsp");
 
             } else {
                 request.setAttribute("error", "El email o la contraseña son incorrectos.");
                 response.sendRedirect("/proyecto_food_rider/index.html");
             }
+
         } catch (Exception exception) {
             request.setAttribute("error", "El inicio de sesión ha fallado: " + exception.getMessage());
             response.sendRedirect("/proyecto_food_rider/index.html");
@@ -94,5 +91,4 @@ public class ServletInicioSesion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

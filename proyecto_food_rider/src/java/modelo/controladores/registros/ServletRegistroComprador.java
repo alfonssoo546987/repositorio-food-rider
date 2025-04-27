@@ -78,8 +78,7 @@ public class ServletRegistroComprador extends HttpServlet {
         usuarios.setTelefono(telefono);
         usuarios.setEmail(email);
         usuarios.setTipo("Comprador");
-        usuarios.setActivo(true);
-
+        
         /*
         Pasamos los valores antes setteados a un registro de la tabla Usuarios, con la ayuda de un método del servicio. Esto se debe hacer para poder tener un objeto que sera una propiedad en la siguinete tabla
          */

@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String tipoUsuario = (String) session.getAttribute("tipoUsuario");
+    String tipoUsuario = (String) session.getAttribute("tipoUsuarioAt");
 %>
 
 <!DOCTYPE html>
@@ -23,6 +23,8 @@
         <fmt:setLocale value="${sessionScope.idioma}"/>
 
         <h1>Food Rider</h1>
+        
+        <h3>Pagina principal del usuario <%= tipoUsuario%></h3>
 
         <form action="/proyecto_food_rider/" id="boton_cerrar_sesion">
             <button><fmt:message key="boton.cerrarSesion"/></button>
@@ -48,22 +50,22 @@
             <button type="submit"><fmt:message key="boton.registrarProveedor"/></button>
         </form>
 
-        <form action="" id="boton_proveedor">
+        <form action="ServletListarEmpresasProveedora" id="boton_proveedor">
             <button><fmt:message key="boton.proveedores"/></button>
         </form>
 
-        <form action="" id="boton_clientes">
+        <form action="ServletListarEmpresaCliente" id="boton_clientes">
             <button><fmt:message key="boton.clientes"/></button>
         </form>
 
-        <form action="" id="boton_riders">
+        <form action="ServletListarEmpleadoRider" id="boton_riders">
             <button><fmt:message key="boton.riders"/></button>
         </form>
 
-        <form action="" id="boton_compradores">
+        <form action="ServletListarCompradores" id="boton_compradores">
             <button><fmt:message key="boton.compradores"/></button>
         </form>
-        <form action="" id="boton_socios">
+        <form action="ServletListarAdministradores" id="boton_socios">
             <button><fmt:message key="boton.socios"/></button>
         </form>
         <form action="" id="boton_ruta_pendiente">

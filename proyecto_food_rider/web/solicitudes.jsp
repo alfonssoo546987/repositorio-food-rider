@@ -6,7 +6,6 @@
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -20,6 +19,8 @@
         <fmt:setLocale value="${sessionScope.idioma}"/>
 
         <!-- Lista de registros de la base de  datos -->
+        
+        <h1>Solicitudes</h1>
         <h2><fmt:message key="titulo.solicitud"/></h2>
         <core:forEach var="elementoEmpresaCliente" items="${empresasClienteNoAceptadoAt}">
             <core:forEach var="elementoUsuario" items="${usuariosNoAceptadoAt}">
@@ -29,7 +30,7 @@
                     <p><fmt:message key="campo.contrasenia"/>${elementoUsuario.contrasenia}</p>
                     <p><fmt:message key="campo.telefono"/>${elementoUsuario.telefono}</p>
                     <p><fmt:message key="campo.nombre_empresa"/>${elementoEmpresaCliente.nombre_empresa_cliente}</p>
-                    <p><fmt:message key="campo.CIF"/>${elementoEmpresaCliente.cif}</p>
+                    <p><fmt:message key="campo.cif"/>${elementoEmpresaCliente.cif}</p>
                     <p><fmt:message key="campo.direccion"/>${elementoEmpresaCliente.direccion}</p>
                     <form action="ServletAceptaORechazaSolicitud" method="POST">                                
                         <label>
@@ -48,15 +49,12 @@
         </core:forEach>
 
         <!-- Botón cierre de sesión -->
-        <form action="/proyecto_food_rider" method="POST">
-            <%
-                session.invalidate();
-            %>
+        <form action="/proyecto_food_rider/" method="POST">
             <button type="submit"><fmt:message key="boton.cerrarSesion"/></button>
         </form>
 
         <!-- Botón cierre vuelta a la página anterior -->
-        <form action="pagina_principal.jsp">
+        <form action="ServletIdiomas" method="GET">
             <button type="submit"><fmt:message key="boton.regresoPaginaPrincipal"/></button>
         </form>
     </body>

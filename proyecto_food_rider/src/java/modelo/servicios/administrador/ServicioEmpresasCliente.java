@@ -43,7 +43,6 @@ public class ServicioEmpresasCliente {
     // Método para obtener todas las empresas cliente
     public List<EmpresasCliente> obtenerEmpresasCliente() {
         EntityManager entityManager = getEntityManager();
-
         try {
             TypedQuery<EmpresasCliente> query = entityManager.createQuery("SELECT s FROM EmpresasCliente s", EmpresasCliente.class);
             return query.getResultList();

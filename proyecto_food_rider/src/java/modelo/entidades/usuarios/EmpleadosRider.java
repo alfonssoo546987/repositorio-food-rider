@@ -24,7 +24,7 @@ public class EmpleadosRider implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_rider;
+    private Long id_empleado_rider;
 
     @Column(name = "numero_documento_empleado_rider", length = 100, nullable = false)
     private String numero_documento_empleado_rider;
@@ -45,12 +45,12 @@ public class EmpleadosRider implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false, unique = true)
     private Usuarios usuario;
 
-    public Long getId_rider() {
-        return id_rider;
+    public Long getId_empleado_rider() {
+        return id_empleado_rider;
     }
 
-    public void setId_rider(Long id_rider) {
-        this.id_rider = id_rider;
+    public void setId_empleado_rider(Long id_empleado_rider) {
+        this.id_empleado_rider = id_empleado_rider;
     }
 
     public String getNumero_documento_empleado_rider() {
@@ -100,4 +100,5 @@ public class EmpleadosRider implements Serializable {
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
+
 }
